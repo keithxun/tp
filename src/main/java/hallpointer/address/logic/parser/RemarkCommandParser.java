@@ -8,6 +8,7 @@ import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.commons.exceptions.IllegalValueException;
 import hallpointer.address.logic.commands.RemarkCommand;
 import hallpointer.address.logic.parser.exceptions.ParseException;
+import hallpointer.address.model.person.Remark;
 
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object
@@ -27,7 +28,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE), ive);
         }
-        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
+        Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         return new RemarkCommand(index, remark);
     }
 }
