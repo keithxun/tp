@@ -6,6 +6,7 @@ import static hallpointer.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -17,6 +18,7 @@ import hallpointer.address.model.person.Email;
 import hallpointer.address.model.person.Name;
 import hallpointer.address.model.person.Person;
 import hallpointer.address.model.person.Phone;
+import hallpointer.address.model.person.Remark;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -44,8 +46,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Remark remark = new Remark("");
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person person = new Person(name, phone, email, address, tagList, remark);
 
         return new AddCommand(person);
     }
