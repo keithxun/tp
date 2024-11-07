@@ -38,7 +38,7 @@ public class SessionDate {
      * Returns true if a given string is a valid date and has the expected format.
      */
     public static boolean isValidDate(String test) {
-        return parseDate(test) != null;
+        return parseDate(test) != null; // Check if parseDate returns a valid date
     }
 
     private static LocalDate parseDate(String dateString) {
@@ -48,7 +48,7 @@ public class SessionDate {
             try {
                 return LocalDate.parse(dateString, DATE_FORMATTER_2);
             } catch (DateTimeParseException e2) {
-                return null;
+                return null; // Return null if both parsing attempts fail
             }
         }
     }
