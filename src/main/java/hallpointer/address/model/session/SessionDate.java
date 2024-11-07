@@ -14,11 +14,12 @@ import java.time.format.DateTimeParseException;
 public class SessionDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in the format dd MMM yyyy.\n"
-                    + "Example: 24 Sep 2024";
+            "Dates should be in the format d MMM yyyy or dd MMM yyyy.\n"
+                    + "Examples: 4 Sep 2024, 24 Sep 2024";
 
-    // Desired date format
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    // Desired date formats
+    public static final DateTimeFormatter DATE_FORMATTER_1 = DateTimeFormatter.ofPattern("d MMM yyyy"); // e.g., 4 Sep 2024
+    public static final DateTimeFormatter DATE_FORMATTER_2 = DateTimeFormatter.ofPattern("dd MMM yyyy"); // e.g., 24 Sep 2024
 
     public final LocalDate fullDate;
 
@@ -30,24 +31,31 @@ public class SessionDate {
     public SessionDate(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        fullDate = LocalDate.parse(date, DATE_FORMATTER);
+        fullDate = parseDate(date);
     }
 
     /**
      * Returns true if a given string is a valid date and has the expected format.
      */
     public static boolean isValidDate(String test) {
+        return parseDate(test) != null;
+    }
+
+    private static LocalDate parseDate(String dateString) {
         try {
-            LocalDate parsedDate = LocalDate.parse(test, DATE_FORMATTER);
-            return parsedDate.format(DATE_FORMATTER).equals(test);
+            return LocalDate.parse(dateString, DATE_FORMATTER_1);
         } catch (DateTimeParseException e) {
-            return false;
+            try {
+                return LocalDate.parse(dateString, DATE_FORMATTER_2);
+            } catch (DateTimeParseException e2) {
+                return null;
+            }
         }
     }
 
     @Override
     public String toString() {
-        return fullDate.format(DATE_FORMATTER);
+        return fullDate.format(DATE_FORMATTER_2); // Assume dd MMM yyyy for consistent output
     }
 
     @Override

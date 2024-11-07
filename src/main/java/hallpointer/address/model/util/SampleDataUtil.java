@@ -29,7 +29,7 @@ public class SampleDataUtil {
                 getTagSet("subcommLeader"),
                 getSessionSet(
                     new Session(new SessionName("AGM"), new SessionDate("24 Sep 2024"), new Point("6")),
-                    new Session(new SessionName("Team Meeting"), new SessionDate("02 Oct 2024"), new Point("4"))
+                    new Session(new SessionName("Team Meeting"), new SessionDate("2 Oct 2024"), new Point("4"))
                 )),
             new Member(new Name("Bernice Yu"), new Telegram("BobLim23"),
                 new Room("5-3-102"),

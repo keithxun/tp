@@ -36,6 +36,7 @@ public class SessionDateTest {
 
         // valid dates
         assertTrue(SessionDate.isValidDate("24 Sep 2024")); // valid date
+        assertTrue(SessionDate.isValidDate("1 Jan 2000")); // valid date
         assertTrue(SessionDate.isValidDate("01 Jan 2000")); // valid date
         assertTrue(SessionDate.isValidDate("15 Aug 2023")); // valid date
     }
